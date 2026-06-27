@@ -1,0 +1,278 @@
+/* Home banner — full-bleed hero under the fixed sidebar. */
+
+.home-banner {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  background-color: var(--background);
+  width: 100vw;
+  max-width: 100vw;
+  margin: 0 0 0 calc(-1 * var(--site-sidebar-width));
+  padding: 0;
+}
+
+/* Full-width star field — fills former side-margin gutters. */
+.home-banner-stars {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.home-banner-pattern {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.home-banner-pattern-inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: max-content;
+  transform-origin: top left;
+  pointer-events: none;
+}
+
+.home-banner-pattern .interactive-ascii {
+  flex-shrink: 0;
+  width: max-content;
+  margin: 0;
+  line-height: 1.05;
+  font-family: var(--font-family-mono), ui-monospace, monospace;
+  white-space: pre;
+  user-select: none;
+  color: #ffffff;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.home-banner-pattern .interactive-ascii-line {
+  min-height: 1.05em;
+  line-height: 1.05;
+  white-space: pre;
+  overflow: visible;
+}
+
+.home-banner-pattern .interactive-ascii-char {
+  display: inline;
+  width: auto;
+  text-align: inherit;
+  letter-spacing: 0;
+  opacity: 1;
+  color: #ffffff;
+}
+
+.home-banner-pattern .interactive-ascii-char.banner-cursor-highlight {
+  color: var(--primary);
+}
+
+.home-banner-pattern .interactive-ascii-char.banner-cursor-trail-fade {
+  animation: home-banner-char-trail-fade var(--banner-cursor-trail-fade-ms, 680ms)
+    ease-out forwards;
+}
+
+@keyframes home-banner-char-trail-fade {
+  0% {
+    color: var(--primary);
+  }
+
+  55% {
+    color: var(--primary);
+  }
+
+  100% {
+    color: #ffffff;
+  }
+}
+
+.home-banner-star {
+  position: absolute;
+  line-height: 1;
+  --base-scale: 1.35;
+  transform: translate(-50%, -50%) scale(var(--base-scale));
+  transform-origin: center center;
+  max-width: none;
+  overflow: visible;
+  pointer-events: auto;
+}
+
+.home-banner-star--braille {
+  --base-scale: 1.35;
+}
+
+.home-banner-star--filler {
+  --base-scale: 1.22;
+}
+
+@media (min-width: 640px) {
+  .home-banner-star,
+  .home-banner-star--braille {
+    --base-scale: 1.42;
+  }
+
+  .home-banner-star--filler {
+    --base-scale: 1.3;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-banner-star,
+  .home-banner-star--braille {
+    --base-scale: 1.5;
+  }
+
+  .home-banner-star--filler {
+    --base-scale: 1.38;
+  }
+}
+
+/* Logos centered in container-wide — two-column layout. */
+.home-banner-inner {
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
+  gap: 2rem;
+  width: 100%;
+  min-width: min-content;
+  overflow: visible;
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  .home-banner-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.home-banner-logo,
+.home-banner-logo-scale,
+.home-banner-cmu,
+.home-banner-cmu .interactive-ascii {
+  pointer-events: auto;
+}
+
+.home-banner-logo {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+@media (min-width: 1024px) {
+  .home-banner-logo {
+    justify-content: flex-end;
+    padding-right: 0.5rem;
+  }
+}
+
+.home-banner-logo-scale {
+  transform: scale(1.484);
+  transform-origin: center center;
+  position: relative;
+  z-index: 1;
+}
+
+.home-banner-cmu {
+  display: flex;
+  width: 100%;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  overflow: visible;
+}
+
+.home-banner-cmu > div,
+.home-banner-cmu > .interactive-ascii {
+  flex-shrink: 0;
+}
+
+.home-banner-cmu > div {
+  position: relative;
+  z-index: 1;
+}
+
+.home-banner-logo .interactive-ascii,
+.home-banner-cmu .interactive-ascii {
+  flex-shrink: 0;
+  width: max-content;
+  overflow: visible;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-family-mono), ui-monospace, monospace;
+  line-height: 1;
+  color: #ffffff;
+  opacity: 1;
+  user-select: none;
+}
+
+.home-banner-logo .interactive-ascii-line,
+.home-banner-cmu .interactive-ascii-line {
+  min-height: 0;
+  line-height: 1;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+.home-banner-logo .interactive-ascii-char,
+.home-banner-cmu .interactive-ascii-char {
+  display: inline-block;
+  width: 1ch;
+  text-align: center;
+  opacity: 1;
+  color: #ffffff;
+  transition: color 0.12s ease;
+}
+
+.home-banner-logo .interactive-ascii-char.banner-cursor-highlight,
+.home-banner-cmu .interactive-ascii-char.banner-cursor-highlight {
+  color: var(--primary);
+}
+
+.home-banner-logo .interactive-ascii-char--space,
+.home-banner-cmu .interactive-ascii-char--space {
+  pointer-events: none;
+}
+
+/* Stars — scoped rules last so they always win over generic .static-ascii */
+.home-banner-stars .home-banner-star .static-ascii {
+  margin: 0;
+  line-height: 1;
+  font-family: var(--font-family-mono), ui-monospace, monospace;
+  white-space: pre;
+  user-select: none;
+  color: #ffffff;
+  opacity: 1;
+  transition: color 0.12s ease, opacity 0.12s ease;
+}
+
+.home-banner-star.banner-cursor-highlight .static-ascii {
+  color: var(--primary);
+  opacity: 1;
+}
+
+.home-banner-stars .home-banner-star--braille .static-ascii {
+  opacity: 1;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.home-banner-stars .home-banner-star--filler .static-ascii {
+  opacity: 1;
+  line-height: 1;
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
+  .home-banner {
+    cursor: default;
+  }
+}
