@@ -31,42 +31,44 @@ function ResearchPageEntry({ item }: { item: ResearchItem }) {
   const resources = item.papers ?? item.links ?? [];
 
   return (
-    <article className={cn("research-entry scroll-mt-28 py-12 first:pt-0")} id={item.id}>
+    <article className={cn("research-entry scroll-mt-28 py-8 md:py-10")} id={item.id}>
       <h2 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
         {item.title}
       </h2>
 
-      <p className="mt-3 text-sm font-semibold text-foreground md:text-base">
-        {item.pageAffiliation}
-        {item.affiliationNote && (
-          <span className="font-normal text-muted-foreground"> {item.affiliationNote}</span>
+      <div className="mt-2 space-y-1 text-sm md:text-base">
+        <p className="font-semibold text-foreground">
+          {item.pageAffiliation}
+          {item.affiliationNote && (
+            <span className="font-normal text-muted-foreground"> {item.affiliationNote}</span>
+          )}
+        </p>
+
+        {item.subtitleLine && (
+          <p className="text-muted-foreground">{item.subtitleLine}</p>
         )}
-      </p>
 
-      {item.subtitleLine && (
-        <p className="mt-1 text-sm text-muted-foreground">{item.subtitleLine}</p>
-      )}
+        {item.pageCollaborators && (
+          <p className="text-muted-foreground">{item.pageCollaborators}</p>
+        )}
 
-      {item.pageCollaborators && (
-        <p className="mt-1 text-sm text-muted-foreground">{item.pageCollaborators}</p>
-      )}
+        <p className="font-mono text-xs italic text-muted-foreground md:text-sm">
+          {item.period}
+        </p>
+      </div>
 
-      <p className="mt-1 font-mono text-xs italic text-muted-foreground md:text-sm">
-        {item.period}
-      </p>
-
-      <p className="mt-5 text-sm leading-relaxed text-muted-foreground md:text-base">
+      <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">
         {item.summary}
       </p>
 
       {item.researchQuestion && (
-        <p className="mt-5 text-sm leading-relaxed text-muted-foreground md:text-base">
+        <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">
           <span className="font-semibold text-foreground">Research question:</span>{" "}
           <RichText text={item.researchQuestion} />
         </p>
       )}
 
-      <h3 className="mt-8 text-base font-semibold tracking-tight text-primary md:text-lg">
+      <h3 className="mt-6 text-base font-semibold tracking-tight text-primary md:text-lg">
         Key Contributions
         {item.contributionsNote && (
           <span className="ml-1.5 font-normal italic text-muted-foreground">
@@ -85,7 +87,7 @@ function ResearchPageEntry({ item }: { item: ResearchItem }) {
 
       {item.plannedWork && (
         <>
-          <h3 className="mt-8 text-base font-semibold tracking-tight text-primary md:text-lg">
+          <h3 className="mt-6 text-base font-semibold tracking-tight text-primary md:text-lg">
             {item.plannedWork.heading}
           </h3>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-muted-foreground md:text-base">
@@ -98,7 +100,7 @@ function ResearchPageEntry({ item }: { item: ResearchItem }) {
         </>
       )}
 
-      <ResearchPaperLinks links={resources} />
+      <ResearchPaperLinks links={resources} className="mt-6 pt-5" />
     </article>
   );
 }
@@ -111,16 +113,16 @@ type ResearchPageListProps = {
 
 export function ResearchPageList({ intro, items, className }: ResearchPageListProps) {
   return (
-    <div className={cn("mx-auto max-w-2xl", className)}>
-      <h1 className="heading-serif !text-primary text-4xl font-semibold tracking-tight md:text-5xl">
+    <div className={cn("w-full", className)}>
+      <h1 className="heading-serif text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
         Research
       </h1>
 
-      <p className="mt-8 text-base leading-relaxed text-muted-foreground md:text-lg">
+      <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
         {intro}
       </p>
 
-      <div className="mt-14 divide-y divide-border border-t border-border">
+      <div className="mt-12 divide-y divide-border border-t border-border pt-10 md:mt-14 md:pt-12">
         {items.map((item) => (
           <ResearchPageEntry key={item.id} item={item} />
         ))}
