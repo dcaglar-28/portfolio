@@ -20,7 +20,7 @@ export function SiteSidebar() {
 
   return (
     <aside
-      className="fixed inset-y-0 left-0 z-40 flex w-[var(--site-sidebar-width)] shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground"
+      className="fixed inset-y-0 left-0 z-40 hidden w-[var(--site-sidebar-width)] shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground lg:flex"
       aria-label="Site navigation"
     >
       <div className="flex min-h-0 flex-1 flex-col overflow-x-hidden overflow-y-auto px-3 py-7">

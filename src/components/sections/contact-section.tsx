@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { contactPage, findMe, siteConfig } from "@/data/site";
+import { contactPage, findMe, readingList, siteConfig } from "@/data/site";
 import { InteractiveGlobeWindow } from "@/components/ui/interactive-globe-window";
+import { WhatImReadingSection } from "@/components/sections/what-im-reading-section";
 
 export function ContactSection() {
   return (
@@ -39,6 +40,12 @@ export function ContactSection() {
             ))}
           </div>
         </div>
+
+        <WhatImReadingSection
+          className="mt-14"
+          title={contactPage.readingTitle}
+          items={readingList}
+        />
 
         <div className="mt-14 border-t border-border pt-10">
           <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">

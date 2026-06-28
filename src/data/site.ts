@@ -88,6 +88,12 @@ export const leadership = [
     period: "Aug 2025 – Present",
   },
   {
+    id: "delta-gamma-booth",
+    organization: "Delta Gamma",
+    role: "Head of Booth Electrical Chair",
+    period: "Present",
+  },
+  {
     id: "fyab",
     organization: "CMU College of Engineering — First Year Advisory Board",
     role: "Head of Marketing",
@@ -696,11 +702,42 @@ export const contactPage = {
   globeEyebrow: "Current Location",
   whatsNextTitle: "What's next",
   whatsNextDescription: [
-    "In July I'll be joining the European Innovation Academy in Porto, Portugal, working with students from 60+ countries to develop a stratup alongside mentors from companies including Google, TikTok, and Microsoft.",
+    "In July I'll be joining the European Innovation Academy in Porto, Portugal, working with students from 60+ countries to develop a startup alongside mentors from companies including Google, TikTok, and Microsoft.",
     "This experience also contributes toward my EDIE additional major, deepening the entrepreneurship and innovation side of my engineering curriculum and connecting the research I do in the lab to the product and venture side of shipping technology to a live market.",
   ],
+  readingTitle: "What I'm Reading",
+};
 
-  };
+export type ReadingItem = {
+  id: string;
+  title: string;
+  href: string;
+};
+
+export const readingList: ReadingItem[] = [
+  {
+    id: "drisa",
+    title: "DRISA: A DRAM-Based Reconfigurable In-Situ Accelerator",
+    href: "https://www.researchgate.net/publication/321173385_DRISA_a_DRAM-based_Reconfigurable_In-Situ_Accelerator",
+  },
+  {
+    id: "neurocube",
+    title:
+      "Neurocube: A Programmable Digital Neuromorphic Architecture with High-Density 3D Memory",
+    href: "https://dl.acm.org/doi/abs/10.1145/3007787.3001178",
+  },
+  {
+    id: "neutnn",
+    title:
+      "NeuroAI Temporal Neural Networks (NeuTNNs): Microarchitecture and Design Framework for Specialized Neuromorphic Processing Units",
+    href: "https://arxiv.org/html/2602.01546",
+  },
+  {
+    id: "neuromorphic-mcts",
+    title: "Neuromorphic Monte Carlo Tree Search Methods for Shortest Path Interdiction",
+    href: "https://dl.acm.org/doi/pdf/10.1109/ICONS62911.2024.00063",
+  },
+];
 
 /** Palo Alto, CA — single marker on the contact globe */
 export const findMe = {
