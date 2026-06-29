@@ -33,6 +33,25 @@ const BANNER_PADDING_TOP = 0;
 const BANNER_PADDING_BOTTOM = 8;
 const CHAR_TRAIL_FADE_ANIMATION = "home-banner-char-trail-fade";
 
+function getSiteSidebarWidthPx() {
+  if (typeof window === "undefined") {
+    return 0;
+  }
+
+  const raw = getComputedStyle(document.documentElement).getPropertyValue(
+    "--site-sidebar-width",
+  );
+  const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+  const trimmed = raw.trim();
+
+  if (trimmed.endsWith("rem") && Number.isFinite(rootFontSize)) {
+    return parseFloat(trimmed) * rootFontSize;
+  }
+
+  const parsed = parseFloat(trimmed);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
 type BannerCellMetrics = {
   cellWidth: number;
   cellHeight: number;
@@ -154,7 +173,11 @@ export function HomeInstitutionBanner() {
     }
 
     const box = banner.getBoundingClientRect();
-    const containerWidth = box.width;
+    const isMobileLayout = box.width < 1024;
+    const sidebarWidthPx = isMobileLayout ? 0 : getSiteSidebarWidthPx();
+    const containerWidth = isMobileLayout
+      ? box.width
+      : Math.max(box.width, window.innerWidth);
     const { art, scale } = buildBannerPattern(containerWidth, box.height);
 
     const measureNode = asciiMeasureRef.current;
@@ -164,7 +187,6 @@ export function HomeInstitutionBanner() {
       return;
     }
 
-    const isMobileLayout = containerWidth < 1024;
     let correctedScale: number;
     let correctedRenderW: number;
     let correctedRenderH: number;
@@ -190,10 +212,7 @@ export function HomeInstitutionBanner() {
     const artWidth = Math.max(...art.split("\n").map((line) => line.length), 1);
     const syntheticCenterCol = getBannerSyntheticCenterColumn(art);
     const syntheticCenterX = (syntheticCenterCol / artWidth) * correctedRenderW;
-    const sidebarWidth = bannerRef.current
-      ? Math.abs(parseFloat(getComputedStyle(bannerRef.current).marginLeft)) || 0
-      : 0;
-    const anchorCenterX = getBannerContentCenterX(containerWidth, sidebarWidth);
+    const anchorCenterX = getBannerContentCenterX(containerWidth, sidebarWidthPx);
     const correctedOffsetX = anchorCenterX - syntheticCenterX;
 
     setPatternScale(scale);
