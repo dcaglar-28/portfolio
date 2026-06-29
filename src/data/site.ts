@@ -176,10 +176,8 @@ export const bio = {
   ],
 };
 
-/** Home page profile photo in `public/profile.png` */
+/** Home page bio intro paragraphs */
 export const bioProfile = {
-  photo: "/profile.png",
-  photoAlt: "Portrait of Dilara Caglar at ASPLOS '24",
   funBio: [
     "I am an undergraduate Electrical and Computer Engineering student at Carnegie Mellon University, pursuing a second major in Engineering Design, Innovation, and Entrepreneurship, with a focus on computer architecture, embedded systems, and energy efficient computing. My focus spans processing-in-memory, neuromorphic computing, and hardware–algorithm co-design, and I'm passionate about advancing work at the intersection of computer architecture and machine learning.",
     "This past year, I interned with ETH Zürich's SAFARI Research Group under Prof. Onur Mutlu, where I helped design processing-in-memory architectures to accelerate in-DRAM homomorphic encryption, reducing latency and energy for large-scale cryptographic workloads. I am currently working at Carnegie Mellon's NeuroAI Computer Architecture Lab (NCAL), where we are extending the NeuTNN spiking-neural-network architecture toward multimodal recognition, training systems on energy-efficient edge hardware.",

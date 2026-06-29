@@ -9,6 +9,20 @@ const PATTERN_LINE_HEIGHT = 1.05;
 /** Rendered width as a fraction of the banner container. */
 export const BANNER_WIDTH_RATIO = 1;
 
+/** Mobile banner uses cover scaling into a taller viewport (logos stay centered). */
+export const BANNER_MOBILE_MIN_HEIGHT = 112;
+export const BANNER_MOBILE_MAX_HEIGHT = 168;
+export const BANNER_MOBILE_HEIGHT_RATIO = 0.34;
+
+export function getMobileBannerHeight(containerWidth: number) {
+  return Math.round(
+    Math.min(
+      BANNER_MOBILE_MAX_HEIGHT,
+      Math.max(BANNER_MOBILE_MIN_HEIGHT, containerWidth * BANNER_MOBILE_HEIGHT_RATIO),
+    ),
+  );
+}
+
 function padPatternLines(art: string) {
   const lines = art.split("\n");
   const width = Math.max(...lines.map((line) => line.length), 1);

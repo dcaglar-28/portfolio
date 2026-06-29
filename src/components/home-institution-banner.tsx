@@ -24,6 +24,7 @@ import {
   buildBannerPattern,
   getBannerContentCenterX,
   getBannerSyntheticCenterColumn,
+  getMobileBannerHeight,
   homeBannerPatternArt,
 } from "@/data/home-banner-pattern";
 
@@ -146,42 +147,60 @@ export function HomeInstitutionBanner() {
   }, []);
 
   const layoutPattern = useCallback(() => {
-    const measureEl = starsRef.current ?? bannerRef.current;
-    if (!measureEl) {
+    const banner = bannerRef.current;
+    const measureEl = starsRef.current;
+    if (!banner || !measureEl) {
       return;
     }
 
-    const box = measureEl.getBoundingClientRect();
-    const { art, scale } = buildBannerPattern(box.width, box.height);
+    const box = banner.getBoundingClientRect();
+    const containerWidth = box.width;
+    const { art, scale } = buildBannerPattern(containerWidth, box.height);
 
     const measureNode = asciiMeasureRef.current;
     const measuredWidth = measureNode?.scrollWidth ?? 0;
-    if (measuredWidth <= 0) {
+    const measuredHeight = measureNode?.scrollHeight ?? 0;
+    if (measuredWidth <= 0 || measuredHeight <= 0) {
       return;
     }
 
-    const targetWidth = box.width * BANNER_WIDTH_RATIO;
-    const correctedScale = targetWidth / measuredWidth;
-    const correctedRenderW = measuredWidth * correctedScale;
-    const correctedRenderH =
-      (measureNode?.scrollHeight ?? 0) * correctedScale;
+    const isMobileLayout = containerWidth < 1024;
+    let correctedScale: number;
+    let correctedRenderW: number;
+    let correctedRenderH: number;
+    let viewportHeight: number;
+    let correctedOffsetY = BANNER_PADDING_TOP;
+
+    if (isMobileLayout) {
+      viewportHeight = getMobileBannerHeight(containerWidth);
+      const widthScale = (containerWidth * BANNER_WIDTH_RATIO) / measuredWidth;
+      const heightScale = viewportHeight / measuredHeight;
+      correctedScale = Math.max(widthScale, heightScale);
+      correctedRenderW = measuredWidth * correctedScale;
+      correctedRenderH = measuredHeight * correctedScale;
+      correctedOffsetY = BANNER_PADDING_TOP + (viewportHeight - correctedRenderH) / 2;
+    } else {
+      viewportHeight =
+        (measuredHeight * (containerWidth * BANNER_WIDTH_RATIO)) / measuredWidth;
+      correctedScale = (containerWidth * BANNER_WIDTH_RATIO) / measuredWidth;
+      correctedRenderW = measuredWidth * correctedScale;
+      correctedRenderH = viewportHeight;
+    }
+
     const artWidth = Math.max(...art.split("\n").map((line) => line.length), 1);
     const syntheticCenterCol = getBannerSyntheticCenterColumn(art);
     const syntheticCenterX = (syntheticCenterCol / artWidth) * correctedRenderW;
     const sidebarWidth = bannerRef.current
       ? Math.abs(parseFloat(getComputedStyle(bannerRef.current).marginLeft)) || 0
       : 0;
-    const anchorCenterX = getBannerContentCenterX(box.width, sidebarWidth);
+    const anchorCenterX = getBannerContentCenterX(containerWidth, sidebarWidth);
     const correctedOffsetX = anchorCenterX - syntheticCenterX;
-    const correctedOffsetY = BANNER_PADDING_TOP;
 
     setPatternScale(scale);
     setPatternVisualScale(correctedScale);
     setPatternArt((prev) => (prev === art ? prev : art));
     setPatternOffset({ x: correctedOffsetX, y: correctedOffsetY });
-    setBannerHeight(
-      correctedRenderH + BANNER_PADDING_TOP + BANNER_PADDING_BOTTOM,
-    );
+    setBannerHeight(viewportHeight + BANNER_PADDING_TOP + BANNER_PADDING_BOTTOM);
   }, []);
 
   useLayoutEffect(() => {
