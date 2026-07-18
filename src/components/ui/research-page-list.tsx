@@ -106,21 +106,16 @@ function ResearchPageEntry({ item }: { item: ResearchItem }) {
 }
 
 type ResearchPageListProps = {
-  intro: string;
   items: ResearchItem[];
   className?: string;
 };
 
-export function ResearchPageList({ intro, items, className }: ResearchPageListProps) {
+export function ResearchPageList({ items, className }: ResearchPageListProps) {
   return (
     <div className={cn("w-full", className)}>
       <h1 className="heading-serif text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
         Research
       </h1>
-
-      <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-        {intro}
-      </p>
 
       <div className="mt-12 divide-y divide-border border-t border-border pt-10 md:mt-14 md:pt-12">
         {items.map((item) => (

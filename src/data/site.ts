@@ -510,8 +510,6 @@ export type ResearchItem = {
   links?: { label: string; href: string }[];
 };
 
-export const researchPageIntro =
-"Work organized by lab and institution. Each entry outlines my contributions, methods, and future directions"
 export const researchItems: ResearchItem[] = [
   {
     id: "neurosoc-eia",
