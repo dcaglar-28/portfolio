@@ -514,6 +514,53 @@ export const researchPageIntro =
 "Work organized by lab and institution. Each entry outlines my contributions, methods, and future directions"
 export const researchItems: ResearchItem[] = [
   {
+    id: "neurosoc-eia",
+    // institutionId is only ever assigned, never looked up, and the home-page
+    // "Research collaborations" list is built from `researchInstitutions` (which
+    // this id is deliberately NOT added to). So using a fresh id here keeps this
+    // venture OFF the academic lab-collaboration list on the home page.
+    institutionId: "eia",
+    title: "NeuroSoC — Offline Neuromorphic Field-Trauma Diagnostic",
+    pageAffiliation: "European Innovation Academy 2026 · Founder",
+    affiliationNote: "(independent venture)",
+    subtitleLine: "In active development · Seeking investors & mentors",
+    pageCollaborators: "",
+    period: "July 2026 – Present",
+    tags: [
+      "Neuromorphic",
+      "Edge AI",
+      "BrainChip Akida",
+      "Spiking Neural Networks",
+      "Point-of-Care Diagnostics",
+      "Medical Devices",
+    ],
+    status: "ongoing",
+    summary:
+      "Founding an independent venture at the European Innovation Academy to build a rugged, offline, low-power handheld that runs many point-of-care diagnostic tests at once on a neuromorphic processor — so a first responder in a disaster zone can diagnose life threats and guide stabilization without power or connectivity. The device is organized around MARCH (Massive hemorrhage, Airway, Respiration, Circulation, Hypothermia/Head), the sequence responders already use, targeting the leading preventable causes of field-trauma death: hemorrhage (~91% of preventable battlefield deaths), airway, and tension pneumothorax.",
+    researchQuestion:
+      "Can milliwatt-scale, event-based (spiking) compute integrate many physiological signals offline — at accuracy comparable to conventional networks — to catch life threats before conventional vitals move?",
+    method: [
+      "**Working Phase-0 prototype:** an end-to-end event-driven (spiking) pipeline diagnosing from real clinical signals at accuracy comparable to a conventional network, at far fewer operations — the compute basis for a low-power, fully-offline device.",
+      "**Four clinical modalities validated on real open data:** ECG arrhythmia (MIT-BIH), myocardial-infarction detection (PTB-XL, ~0.89 AUROC), shockable-rhythm / defibrillate-or-not (VFDB + CUDB, ~0.94 AUROC), and heart-sound normal/abnormal (PhysioNet/CinC 2016).",
+      "**Runs on commodity neuromorphic silicon (BrainChip Akida):** validated that the float-to-on-chip accuracy drop essentially closes (e.g. ECG 0.928 → 0.926 balanced accuracy in Akida simulation), so the models survive deployment.",
+      "**Hemorrhage detection pipeline demonstrated:** a physiologically-grounded Compensatory-Reserve model flags compensated ('occult') blood loss before heart rate moves — proven as a pipeline; real-data validation is the next step.",
+    ],
+    contributionsNote: "(Phase-0 software prototype)",
+    plannedWork: {
+      heading: "Roadmap & Collaboration",
+      items: [
+        "**MARCH roadmap:** extend from the validated cardiac and auscultation modalities to Respiration/Airway (lung sounds) and a real-data hemorrhage signal, then build a multimodal fusion head across a MARCH stabilization timeline.",
+        "**Seeking investors and mentors** to take the Phase-0 prototype toward a field-ready device — introductions in neuromorphic hardware, medical devices, and defense / humanitarian health are especially welcome.",
+      ],
+    },
+    phases: [],
+    papers: [
+      { label: "GitHub — NeuroSoC", href: "https://github.com/dcaglar-28/NeuroSoC" },
+      { label: "BrainChip Akida", href: "https://brainchip.com/ip/" },
+      { label: "European Innovation Academy", href: "https://www.inacademy.eu/" },
+    ],
+  },
+  {
     id: "safari-memory",
     institutionId: "safari",
     title: "DRAM Processing-in-Memory for Fully Homomorphic Encryption",

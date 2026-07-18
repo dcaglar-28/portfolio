@@ -2,6 +2,7 @@ import type { ResearchItem } from "@/data/site";
 import { researchItems } from "@/data/site";
 
 const RESEARCH_PAGE_ORDER = [
+  "neurosoc-eia",
   "safari-memory",
   "newtnn-ncal",
   "nexus-asic",
